@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:internships-test;DB_CLOSE_DELAY=-1
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+app:
+  jwt:
+    secret: dGVzdC1zZWNyZXQta2V5LWZvci1pbnRlcm5zaGlwLXBsYXRmb3JtLXRlc3Rz
+    expiration-minutes: 30
+  cors:
+    allowed-origins: http://localhost:4200
+  seed-demo-data: false

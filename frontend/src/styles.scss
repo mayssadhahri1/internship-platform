@@ -1,0 +1,79 @@
+:root {
+  --bg: #f5f7fb;
+  --ink: #16243a;
+  --muted: #6a7587;
+  --line: #e2e7ef;
+  --accent: #1f6fb2;
+  --accent-soft: #eaf2fb;
+  --danger: #c0392b;
+  --success: #1e8449;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+h1 { font-size: 24px; margin: 0 0 16px; }
+h2 { font-size: 17px; margin: 0 0 12px; }
+a { color: var(--accent); }
+
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+
+.muted { color: var(--muted); }
+.error { color: var(--danger); font-size: 14px; }
+.success { color: var(--success); font-weight: 500; }
+
+label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+
+input, textarea, select {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font: inherit;
+  color: var(--ink);
+  background: #fff;
+}
+input:focus, textarea:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 9px 16px;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn.ghost { background: #fff; color: var(--accent); }
+.btn.ghost.danger { color: var(--danger); border-color: var(--danger); }
+
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 3px 10px; font-size: 12px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; color: var(--muted); font-weight: 500; border-bottom: 1px solid var(--line); padding: 8px; }
+td { padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+
+.badge { border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 600; }
+.badge.PENDING { background: #fff4e0; color: #b9770e; }
+.badge.ACCEPTED { background: #e6f4ea; color: var(--success); }
+.badge.REJECTED { background: #fbeaea; color: var(--danger); }

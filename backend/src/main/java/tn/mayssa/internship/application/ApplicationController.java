@@ -1,0 +1,54 @@
+package tn.mayssa.internship.application;
+
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import tn.mayssa.internship.application.ApplicationService.ApplicationResponse;
+import tn.mayssa.internship.application.ApplicationService.ApplyRequest;
+import tn.mayssa.internship.application.ApplicationService.StatusRequest;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api")
+public class ApplicationController {
+
+    private final ApplicationService service;
+
+    public ApplicationController(ApplicationService service) {
+        this.service = service;
+    }
+
+    @PostMapping("/offers/{offerId}/applications")
+    @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('STUDENT')")
+    public ApplicationResponse apply(@PathVariable Long offerId, @Valid @RequestBody ApplyRequest req) {
+        return service.apply(offerId, req);
+    }
+
+    @GetMapping("/applications/mine")
+    @PreAuthorize("hasRole('STUDENT')")
+    public List<ApplicationResponse> mine() {
+        return service.mine();
+    }
+
+    @GetMapping("/offers/{offerId}/applications")
+    @PreAuthorize("hasRole('COMPANY')")
+    public List<ApplicationResponse> forOffer(@PathVariable Long offerId) {
+        return service.forOffer(offerId);
+    }
+
+    @PatchMapping("/applications/{id}/status")
+    @PreAuthorize("hasRole('COMPANY')")
+    public ApplicationResponse changeStatus(@PathVariable Long id, @Valid @RequestBody StatusRequest req) {
+        return service.changeStatus(id, req.status());
+    }
+}
